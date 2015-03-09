@@ -43,18 +43,21 @@ UI_MODELS = {
         "name": "submission",
         "class_id": "openassessment__response",
         "navigation_text": "Your response to this assignment",
+        "URL_link":"Link to Snap! Project"
         "title": "Your Response"
     },
     "student-training": {
         "name": "student-training",
         "class_id": "openassessment__student-training",
         "navigation_text": "Learn to assess responses",
+        "URL_link":"Link to Snap! Project"
         "title": "Learn to Assess"
     },
     "peer-assessment": {
         "name": "peer-assessment",
         "class_id": "openassessment__peer-assessment",
         "navigation_text": "Your assessment(s) of peer responses",
+        
         "title": "Assess Peers' Responses"
     },
     "self-assessment": {
