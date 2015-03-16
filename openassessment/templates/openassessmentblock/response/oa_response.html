@@ -47,9 +47,6 @@
                     {% endif %}
                     <strong class="emphasis">{% trans "After you submit your response, you cannot edit it" %}</strong>.
                 </p>
-                <p> 
-                    {% trans "Enter the URL to your Snap! project." %}
-                </p>
             </div>
 
             <div class="step__content">
@@ -137,6 +134,60 @@
                                 </article>
                             </li>
                             {% endif %}
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="step__instruction">
+                <p> 
+                    {% trans "Enter the URL to your Snap! project." %}
+                </p>
+            </div>
+
+            <div class="step__content">
+                    <form id="response__submission" class="response__submission">
+                        <ol class="list list--fields response__submission__content">
+                            {% for part in saved_response.answer.parts %}
+                                <li class="submission__answer__part">
+                                    <article class="submission__answer__part__prompt ui-toggle-visibility">
+                                        <h2 class="submission__answer__part__prompt__title">{% trans "The prompt for this section." %}</h2>
+                                        <div class="submission__answer__part__prompt__copy ui-toggle-visibility__content">
+                                        {{ part.prompt.description|linebreaks }}
+                                        </div>
+                                    </article>
+                                    <div class="field field--textarea submission__answer__part__text">
+                                        <label class="sr" for="submission__answer__part__text__{{ forloop.counter }}">{% trans "Your Snap! Project URL." %}</label>
+                                        <textarea
+                                            id="submission__answer__part__text__{{ forloop.counter }}"
+                                            class="submission__answer__part__text__value"
+                                            placeholder="Enter your URL to your Snap! Project."
+                                            maxlength="100000"
+                                        >{{ part.text }}</textarea>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+
+                        <span class="tip">{% trans "You may continue to work on your response until you submit it." %}</span>
+
+                        <div class="response__submission__actions">
+                            <div class="message message--inline message--error message--error-server">
+                                <h3 class="message__title">{% trans "We could not save your progress" %}</h3>
+                                <div class="message__content"></div>
+                            </div>
+
+                            <ul class="list list--actions">
+                                <li class="list--actions__item">
+                                    <button type="submit" id="submission__save" class="action action--save submission__save is--disabled">{% trans "Save Your Progress" %}</button>
+
+                                    <div id="response__save_status" class="response__submission__status">
+                                        <h3 class="response__submission__status__title">
+                                            <span class="sr">{% trans "Your Submission Status" %}:</span>
+                                            {{ save_status }}
+                                        </h3>
+                                    </div>
+                                </li>
                         </ul>
                     </div>
                 </form>
