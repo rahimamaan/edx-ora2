@@ -173,6 +173,9 @@ def prepare_submission_for_serialization(submission_data):
     Returns:
         dict
     """
+    if api.allows_url():
+        return {'parts':[{'text': text} for text in submission_data],
+                'url' : submission_data['url']
     return {
         'parts': [{'text': text} for text in submission_data],
     }
