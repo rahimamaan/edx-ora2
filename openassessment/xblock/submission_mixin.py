@@ -188,6 +188,7 @@ class SubmissionMixin(object):
                 "created_at": submission["created_at"],
                 "submitted_at": submission["submitted_at"],
                 "answer": submission["answer"],
+                "url":submission["url"]
             }
         )
 
@@ -374,13 +375,17 @@ class SubmissionMixin(object):
             try:
                 json.loads(self.saved_response)
                 saved_response = {
-                    'answer': json.loads(self.saved_response),
+                    'answer': json.loads(self.saved_response[0]),
+                    'url':json.loads(self.saved_response[1])
                 }
             except ValueError:
                 saved_response = {
                     'answer': {
-                        'text': self.saved_response,
-                    },
+                        'text': self.saved_response[0]
+                    }
+                    'url': {
+                        'url': self.saved_response[1]
+                        },
                 }
 
             context['saved_response'] = create_submission_dict(saved_response, self.prompts)
