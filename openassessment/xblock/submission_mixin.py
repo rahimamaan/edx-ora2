@@ -38,7 +38,7 @@ class SubmissionMixin(object):
         response at this time.
 
         Args:
-            data (dict): Data may contain two attributes: submission and
+            data (dict): Data may contain two attributes: submission, a url, or
                 file_url. submission is the response from the student which
                 should be stored in the Open Assessment system. file_url is the
                 path to a related file for the submission. file_url is optional.
@@ -58,6 +58,7 @@ class SubmissionMixin(object):
 
         status = False
         student_sub_data = data['submission']
+        #student_url_data = data['url']
         success, msg = validate_submission(student_sub_data, self.prompts, self._)
         if not success:
             return (
@@ -124,7 +125,7 @@ class SubmissionMixin(object):
                 status_tag = submission.get('student_item')
                 status_text = submission.get('attempt_number')
 
-        return status, status_tag, status_text
+        return status, status_tag, status_text #, student_url_data
 
     @XBlock.json_handler
     def save_submission(self, data, suffix=''):
@@ -174,7 +175,7 @@ class SubmissionMixin(object):
 
         if self.allow_file_upload:
             student_sub_dict['file_key'] = self._get_student_item_key()
-        submission = api.create_submission(student_item_dict, student_sub_dict)
+        submission = api.create_submission(student_item_dict, student_sub_dict, url)
         self.create_workflow(submission["uuid"])
         self.submission_uuid = submission["uuid"]
 
