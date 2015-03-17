@@ -39,7 +39,7 @@ class CsvWriter(object):
         ],
         'submission': [
             'uuid', 'student_id', 'item_id',
-            'submitted_at', 'created_at', 'raw_answer'
+            'submitted_at', 'created_at', 'raw_answer','url'
         ],
         'score': [
             'submission_uuid',
@@ -199,7 +199,8 @@ class CsvWriter(object):
             submission['student_item']['item_id'],
             submission['submitted_at'],
             submission['created_at'],
-            json.dumps(submission['answer'])
+            json.dumps(submission['answer']),
+            json.dumps(submission['url'])
         ])
 
         score = sub_api.get_latest_score_for_submission(submission_uuid, read_replica=True)
