@@ -173,9 +173,7 @@ def prepare_submission_for_serialization(submission_data):
     Returns:
         dict
     """
-    if api.allows_url():
-        return {'parts':[{'text': text} for text in submission_data],
-                'url' : submission_data['url']
+    # do we need to serialize the url, do we need to feed it through this function? 
     return {
         'parts': [{'text': text} for text in submission_data],
     }
